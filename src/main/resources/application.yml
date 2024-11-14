@@ -16,10 +16,7 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
-  #    url: jdbc:postgresql://localhost:5432/surl_dev
-  #    username: postgres
-  #    password: koreait123414
-  #    driver-class-name: org.postgresql.Driver
+
 
   jpa:
     hibernate:
