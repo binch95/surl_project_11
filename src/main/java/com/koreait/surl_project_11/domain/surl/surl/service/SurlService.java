@@ -42,4 +42,21 @@ public class SurlService { // 비지니스 로직 처리 담당
     public void increaseCount(Surl surl) {
         surl.increaseCount();
     }
+
+    @Transactional
+    public void delete(Surl surl) {
+        surlRepository.delete(surl);
+    }
+
+    public List<Surl> findByAuthorOrderByIdDesc(Member author) {
+        return surlRepository.findByAuthorOrderByIdDesc(author);
+    }
+
+    @Transactional
+    public RsData<Surl> modify(Surl surl, String body, String url) {
+        surl.setBody(body);
+        surl.setUrl(url);
+
+        return RsData.of("%d번 SURL이 수정됨".formatted(surl.getId()), surl);
+    }
 }
