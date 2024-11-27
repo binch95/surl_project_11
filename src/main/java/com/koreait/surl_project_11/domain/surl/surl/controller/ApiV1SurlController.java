@@ -2,6 +2,7 @@ package com.koreait.surl_project_11.domain.surl.surl.controller;
 
 import com.koreait.surl_project_11.domain.auth.auth.service.AuthService;
 import com.koreait.surl_project_11.domain.member.member.entity.Member;
+import com.koreait.surl_project_11.domain.member.member.service.MemberService;
 import com.koreait.surl_project_11.domain.surl.surl.dto.SurlDto;
 import com.koreait.surl_project_11.domain.surl.surl.entity.Surl;
 import com.koreait.surl_project_11.domain.surl.surl.service.SurlService;
@@ -30,6 +31,7 @@ public class ApiV1SurlController {
     private final Rq rq;
     private final SurlService surlService;
     private final AuthService authService;
+    private final MemberService memberService;
 
     @AllArgsConstructor
     @Getter
@@ -78,6 +80,9 @@ public class ApiV1SurlController {
     ) {
         Surl surl = surlService.findById(id).orElseThrow(GlobalException.E404::new);
 
+        rq.getMember(); // member 로딩
+        rq.getMember(); // 빠르게 했으면 좋겠어
+
         authService.checkCanGetSurl(rq.getMember(), surl);
 
         return RsData.of(
@@ -95,6 +100,7 @@ public class ApiV1SurlController {
 
     @GetMapping("")
     public RsData<SurlGetItemsRespBody> getItems() {
+
         Member member = rq.getMember();
 
         List<Surl> surls = surlService.findByAuthorOrderByIdDesc(member);
