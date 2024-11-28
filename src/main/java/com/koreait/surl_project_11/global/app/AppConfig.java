@@ -25,7 +25,6 @@ public class AppConfig {
         return new BCryptPasswordEncoder();
     }
 
-
     @Getter
     private static String jwtSecretKey;
 
