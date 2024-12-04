@@ -9,12 +9,13 @@
 			return;
 		}
 		form.password.value = form.password.value.trim();
+		console.log(form.password.value);
 		if (form.password.value.length === 0) {
 			alert('password 입력해');
 			form.password.focus();
 			return;
 		}
-		const rs = await fetch('http://localhost:8070/api/v1/members/login', {
+		const rs = await fetch(`${import.meta.env.VITE_CORE_API_BASE_URL}/api/v1/members/login`, {
 			method: 'POST',
 			credentials: 'include', 
 			headers: {

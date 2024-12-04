@@ -61,6 +61,8 @@ public class ApiV1MemberController {
 
         Member member = memberService.findByUsername(requestBody.username).orElseThrow(() -> new GlobalException("401-1", "해당 회원은 없다"));
 
+        System.out.println("memento: " + member.getPassword());
+
         if (!memberService.matchPassword(requestBody.password, member.getPassword())) {
             throw new GlobalException("401-2", "비번 틀림");
         }
